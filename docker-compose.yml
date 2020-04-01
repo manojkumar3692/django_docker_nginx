@@ -9,7 +9,7 @@ services:
         expose: 
             - 8001   
         command: >
-            sh -c "uwsgi --ini ./config/uwsgi.ini"
+            sh -c "uwsgi --ini ./config/uwsgi.ini && ./xray -n us-east-2"
     nginx:
         build: ./nginx
         container_name: nginx

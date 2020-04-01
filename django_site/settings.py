@@ -37,9 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'aws_xray_sdk.ext.django'
 ]
 
 MIDDLEWARE = [
+    'aws_xray_sdk.ext.django.middleware.XRayMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -48,6 +50,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+XRAY_RECORDER = {
+    'AWS_XRAY_DAEMON_ADDRESS': '127.0.0.1:2000',
+    'AUTO_INSTRUMENT': True,  # If turned on built-in database queries and template rendering will be recorded as subsegments
+    'AWS_XRAY_CONTEXT_MISSING': 'LOG_ERROR',
+    'PLUGINS': (),
+    'SAMPLING': True,
+    'SAMPLING_RULES': None,
+    'AWS_XRAY_TRACING_NAME': 'payment', # the segment name for segments generated from incoming requests
+    'DYNAMIC_NAMING': None, # defines a pattern that host names should match
+    'STREAMING_THRESHOLD': None, # defines when a segment starts to stream out its children subsegments
+}
 
 ROOT_URLCONF = 'django_site.urls'
 
