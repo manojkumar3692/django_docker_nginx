@@ -1,4 +1,4 @@
 Django>=2.1.3,<3.0.0
 djangorestframework>=3.9.0,<3.10.0
-uWSGI==2.0.18
+uWSGI==2.0.22
 aws-xray-sdk==2.4.3
